@@ -39,7 +39,7 @@ export async function fetchUser(userId: string){
     try {
         connectToDB();
 
-        await User.findOne({ id: userId})
+       return await User.findOne({ id: userId})
     } catch (error:any) {
         throw new Error(`Failed to fetch user: ${error.message}`)
     }
