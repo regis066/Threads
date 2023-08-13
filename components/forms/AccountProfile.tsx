@@ -20,6 +20,8 @@ import { ChangeEvent, useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { isBase64Image } from '@/lib/utils';
 import { useUploadThing } from '@/lib/uploadthing';
+import { updateUser } from '@/lib/actions/user.actions';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface Props {
     user : {
@@ -37,7 +39,9 @@ interface Props {
 const AccountProfile = ({ user , btnTitle} : Props) =>{
 
   const [files, setFiles] = useState<File[]>([]) ;
-  const { startUpload } = useUploadThing("media")
+  const { startUpload } = useUploadThing("media");
+  const  pathname  = usePathname();
+  const router = useRouter();
 
 
     const form = useForm({
@@ -62,7 +66,19 @@ const AccountProfile = ({ user , btnTitle} : Props) =>{
             }
           }
 
-          
+          await updateUser(
+            user.id,
+            values.username,
+            values.name,
+            values.bio,
+            values.profile_photo,
+            pathname
+          );
+          if(pathname === '/profile/edit'){
+              router.back()
+          }else{
+            router.push('/')
+          }
       }
 
       const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: ((value:string) => void)) =>{
