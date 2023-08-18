@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
 import Image from "next/image";
 import ThreadsTab from "@/components/shared/ThreadsTab";
+import UserCard from "@/components/cards/UserCard";
 
  
  
@@ -37,7 +38,18 @@ const Page = async () => {
             {result.users.length === 0 ? (
                 <p className="no-result">No Users</p>
             ): (
-                
+                <>
+                    {result.users.map((person) => (
+                        <UserCard 
+                        key={person.id}
+                        id={person.id}
+                        name={person.name}
+                        username={person.username}
+                        imgUrl={person.image}
+                        personType="User"
+                        />
+                    ))}   
+                </>
             )}
         </div>
     </section>
