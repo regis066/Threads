@@ -32,11 +32,11 @@ interface Params {
 }
 
 export async function updateUser({
+  username,
   userId,
   bio,
   name,
   path,
-  username,
   image,
 }: Params): Promise<void> {
   try {

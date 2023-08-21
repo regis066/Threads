@@ -1,4 +1,5 @@
 "use server";
+
 import { revalidatePath } from "next/cache";
 
 import { connectToDB } from "../mongoose";
@@ -24,7 +25,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
     })
     .populate({
       path: "community",
-      model: Thread,
+      model: Community,
     })
     .populate({
       path: "children", // Populate the children field

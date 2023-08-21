@@ -11,7 +11,6 @@ async function Home() {
   return (
     <>
     <h1 className="head-text text-left">Home</h1>
-    { console.log(result) }
 
     <section className="mt-9  flex flex-col gap-10">
       {result.posts.length === 0 ? (
@@ -22,7 +21,7 @@ async function Home() {
           <ThreadCard 
             key={post._id}
             id={post._id}
-            currentUser = {user?.id || ""}
+            currentUserId = {user?.id || ""}
             parentId = {post.parentId}
             content={post.text}
             author={post.author}
